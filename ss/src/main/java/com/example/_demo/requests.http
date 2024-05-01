@@ -1,0 +1,29 @@
+### Bob creating a course
+POST http://localhost:8081/courses
+Content-Type: application/json
+Authorization: Basic Ym9iQGV4YW1wbGUuY29tOnBhc3N3b3Jk
+
+{
+  "title": "Spring Security"
+}
+
+### Alice attempting to create a course
+POST http://localhost:8081/courses
+Content-Type: application/json
+Authorization: Basic YWxpY2VAZXhhbXBsZS5jb206cGFzc3dvcmQ=
+
+{
+  "title": "Keycloak"
+}
+
+### Bob deleting a course he created
+DELETE http://localhost:8081/courses/202
+Authorization: Basic Ym9iQGV4YW1wbGUuY29tOnBhc3N3b3Jk
+
+### Jojo attempting to delete a course Bob created
+DELETE http://localhost:8081/courses/202
+Authorization: Basic am9qb0BleGFtcGxlLmNvbTpwYXNzd29yZA==
+
+### Bob using API Key authentication
+GET http://localhost:8081/courses
+Api-Key: 0a9b7c97-7ed3-41b4-85f8-f1915372d45a
