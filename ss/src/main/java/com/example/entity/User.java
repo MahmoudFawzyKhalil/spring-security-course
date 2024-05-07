@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.lang.Nullable;
 
 import java.util.Set;
@@ -22,6 +23,7 @@ public class User {
     @Nullable
     private String password;
 
+    @Setter
     private String apiKey;
 
     @ManyToMany(fetch = FetchType.EAGER)

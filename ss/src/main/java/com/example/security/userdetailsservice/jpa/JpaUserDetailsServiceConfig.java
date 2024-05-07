@@ -13,7 +13,6 @@ import org.springframework.security.data.repository.query.SecurityEvaluationCont
 import java.util.List;
 import java.util.Set;
 
-
 public class JpaUserDetailsServiceConfig {
 
     @Bean
@@ -23,8 +22,8 @@ public class JpaUserDetailsServiceConfig {
 
     @Bean
     public ApplicationRunner initializeUsers(AuthorityRepository authorityRepository,
-                                             UserRepository userRepository,
-                                             PasswordEncoder passwordEncoder) {
+                                              UserRepository userRepository,
+                                              PasswordEncoder passwordEncoder) {
         return args -> {
             boolean usersExist = userRepository.findByUsername("bob@example.com").isPresent();
             if (usersExist) {
@@ -42,6 +41,7 @@ public class JpaUserDetailsServiceConfig {
                     passwordEncoder.encode("password"),
                     Set.of(roleInstructor)
             );
+            bob.setApiKey("abc");
 
             User jojo = new User(
                     "jojo@example.com",

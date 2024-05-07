@@ -25,6 +25,6 @@ public class ApiKeyAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return ApiKeyAuthenticationToken.class.equals(authentication);
+        return ApiKeyAuthenticationToken.class.isAssignableFrom(authentication);
     }
 }
