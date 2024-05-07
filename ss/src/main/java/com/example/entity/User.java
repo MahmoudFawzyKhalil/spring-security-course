@@ -22,6 +22,7 @@ public class User {
     @Nullable
     private String password;
 
+    @Column(name = "api_key")
     private String apiKey;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -35,9 +36,10 @@ public class User {
         this.password = null;
     }
 
-    public User(String email, String password, Set<Authority> authorities) {
+    public User(String email, String password, Set<Authority> authorities, String apiKey) {
         this.email = email;
         this.password = password;
         this.authorities = authorities;
+        this.apiKey = apiKey;
     }
 }
