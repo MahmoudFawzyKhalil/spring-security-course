@@ -26,4 +26,4 @@ Authorization: Basic am9qb0BleGFtcGxlLmNvbTpwYXNzd29yZA==
 
 ### Bob using API Key authentication
 GET http://localhost:8081/courses
-Api-Key: 0a9b7c97-7ed3-41b4-85f8-f1915372d45a
+Api-Key: ananada
