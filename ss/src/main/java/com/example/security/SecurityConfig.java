@@ -1,10 +1,12 @@
 package com.example.security;
 
 import com.example.security.apikey.ApiKeyAuthenticationConfigurer;
+import com.example.security.apikey.AuthenticationFilter.AuthenticationFilterConfigure;
 import com.example.security.passwordencoder.PasswordEncoderConfig;
 import com.example.security.rolehierarchy.RoleHierarchyConfig;
 import com.example.security.userdetailsservice.jpa.JpaUserDetailsServiceConfig;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -12,8 +14,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager;
 
-//@Configuration
+@Configuration
 @Import({
 //        InMemoryUserDetailsServiceConfig.class,
         PasswordEncoderConfig.class,
@@ -66,5 +69,8 @@ public class SecurityConfig {
     private static void configureApiKeyAuthentication(HttpSecurity http) throws Exception {
         http.with(new ApiKeyAuthenticationConfigurer(), Customizer.withDefaults());
     }
+//    private static void configureApiKeyAuthentication(HttpSecurity http) throws Exception {
+//        http.with(new AuthenticationFilterConfigure(), Customizer.withDefaults());
+//    }
 
 }
