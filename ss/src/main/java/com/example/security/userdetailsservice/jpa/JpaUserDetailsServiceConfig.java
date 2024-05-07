@@ -40,19 +40,19 @@ public class JpaUserDetailsServiceConfig {
             User bob = new User(
                     "bob@example.com",
                     passwordEncoder.encode("password"),
-                    Set.of(roleInstructor)
+                    Set.of(roleInstructor), "ABCDE"
             );
 
             User jojo = new User(
                     "jojo@example.com",
                     passwordEncoder.encode("password"),
-                    Set.of(roleInstructor)
+                    Set.of(roleInstructor),"ABCDFG"
             );
 
             User alice = new User(
                     "alice@example.com",
                     passwordEncoder.encode("password"),
-                    Set.of(roleStudent)
+                    Set.of(roleStudent) , "ABCDFGH"
             );
 
             userRepository.saveAll(List.of(bob, jojo, alice));
