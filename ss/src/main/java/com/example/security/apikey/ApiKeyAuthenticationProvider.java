@@ -20,7 +20,7 @@ public class ApiKeyAuthenticationProvider implements AuthenticationProvider {
         if (securityUser == null) {
             throw new BadCredentialsException("Bad API Key");
         }
-        return new ApiKeyAuthenticationToken(true, null, securityUser);
+        return new ApiKeyAuthenticationToken(true, apiKeyAuth.getApiKey(), securityUser);
     }
 
     @Override

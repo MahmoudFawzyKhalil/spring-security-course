@@ -19,7 +19,7 @@ public class ApiKeyAuthenticationConfigurer extends AbstractHttpConfigurer<ApiKe
         http.authenticationProvider(apiKeyAuthenticationProvider);
         AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
 
-        ApiKeyAuthenticationFilter apiKeyAuthenticationFilter = new ApiKeyAuthenticationFilter(authenticationManager);
+        ApiKeyFilter apiKeyAuthenticationFilter = new ApiKeyFilter(authenticationManager, new AuthConverter());
         http.addFilterBefore(apiKeyAuthenticationFilter, BasicAuthenticationFilter.class);
     }
 }
